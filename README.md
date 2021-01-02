@@ -2,7 +2,7 @@
 
 通过 C++ 实现的并行 K-Means 算法
 
-Work in progress
+已完成：Point 类、Cluster 类
 
 ## Build
 
