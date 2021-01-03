@@ -45,3 +45,41 @@ void KMeans::InitClusters(void)
         next_clusters_y_sum.push_back(0.0); //设置 next_clusters_y_sum 初始值为 0.0
     }
 }
+
+
+//计算 point 和 cluster 的距离
+inline double CalcDistance(Point& point, Cluster& cluster)
+{
+    return sqrt(pow(point.GetX() - cluster.GetX(), 2.0) +
+                pow(point.GetY() - cluster.GetY(), 2.0));
+}
+
+
+//分配点
+void KMeans::AssignPoints(void)
+{
+    int min_cluster_id;
+    double min_distance;
+
+    for (int i = 0; i < point_num; i++) //遍历点
+    {
+        min_cluster_id = 0; //假定 0 号聚类为与 points[i] 最近的聚类
+        min_distance = CalcDistance(points[i], clusters[0]); //假定 0 号聚类为与 points[i] 最近的聚类
+
+        for (int j = 1; j < cluster_num; j++) //遍历聚类
+        {
+            double distance = CalcDistance(points[i], clusters[j]); //计算距离
+
+            if (distance < min_distance) //比较
+            {
+                min_distance = distance;
+                min_cluster_id = j;
+            }
+        }
+
+        points[i].SetClusterID(min_cluster_id); //更新点所属的聚类 id
+        next_clusters_point_num[min_cluster_id]++; //增加对应聚类中点的数量
+        next_clusters_x_sum[min_cluster_id] += points[i].GetX(); //增加对应聚类中点的 x 坐标和
+        next_clusters_y_sum[min_cluster_id] += points[i].GetY(); //增加对应聚类中点的 y 坐标和
+    }
+}
