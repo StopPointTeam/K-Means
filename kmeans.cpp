@@ -83,3 +83,32 @@ void KMeans::AssignPoints(void)
         next_clusters_y_sum[min_cluster_id] += points[i].GetY(); //增加对应聚类中点的 y 坐标和
     }
 }
+
+
+//更新聚类。若所有聚类均值点均不移动，返回 false
+bool KMeans::UpdateClusters(void)
+{
+    bool is_cluster_move = false; //假定所有聚类均值点都不移动
+
+    double next_x;
+    double next_y;
+    
+    for (int i = 0; i < cluster_num; i++)
+    {
+        next_x = next_clusters_x_sum[i] / (double)next_clusters_point_num[i]; //更新后的均值点 x 坐标
+        next_y = next_clusters_y_sum[i] / (double)next_clusters_point_num[i]; //更新后的均值点 y 坐标
+        
+        if (clusters[i].GetX() != next_x || clusters[i].GetY() != next_y)
+        {
+            is_cluster_move = true; //若发生移动，则 is_cluster_move 改为 true
+            clusters[i].SetX(next_x); //更新均值点 x 坐标
+            clusters[i].SetY(next_y); //更新均值点 y 坐标
+        }
+
+        next_clusters_point_num[i] = 0; //设置 next_clusters_point_num 值为 0
+        next_clusters_x_sum[i] = 0.0; //设置 next_clusters_x_sum 值为 0.0
+        next_clusters_y_sum[i] = 0.0; //设置 next_clusters_y_sum 值为 0.0
+    }
+
+    return is_cluster_move;
+}
