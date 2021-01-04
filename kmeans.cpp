@@ -112,3 +112,24 @@ bool KMeans::UpdateClusters(void)
 
     return is_cluster_move;
 }
+
+
+//返回结果
+std::vector<Point> KMeans::Result(void)
+{
+    InitPoints(); //初始化点
+    InitClusters(); //初始化聚类
+
+    bool is_cluster_move = true;
+    int interation_times = 0;
+
+    while (is_cluster_move && interation_times < max_interation_times) //当所有聚类不再移动或超出最大迭代次数时结束循环
+    {
+        AssignPoints(); //分配点
+        is_cluster_move = UpdateClusters(); //更新聚类
+
+        interation_times++;
+    }
+
+    return points;
+}
