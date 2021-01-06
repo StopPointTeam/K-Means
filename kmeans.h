@@ -1,6 +1,11 @@
 #ifndef KMEANS_H
 #define KMEANS_H
 
+//取消此处注释，则输出每轮迭代的结果
+//#define OUTPUT_EVERY_INTERATION
+
+
+#include <vector>
 
 #include "point.h"
 #include "cluster.h"

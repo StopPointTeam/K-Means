@@ -1,6 +1,15 @@
 #include <ctime>
 #include <cmath>
 
+//下列代码用于输出每轮迭代的结果
+#ifdef OUTPUT_EVERY_INTERATION
+
+#include <string>
+#include <sstream>
+#include <fstream>
+
+#endif //OUTPUT_EVERY_INTERATION
+
 #include "kmeans.h"
 
 
@@ -129,6 +138,20 @@ std::vector<Point> KMeans::Result(void)
         is_cluster_move = UpdateClusters(); //更新聚类
 
         interation_times++;
+
+        //下列代码用于输出每轮迭代的结果
+        #ifdef OUTPUT_EVERY_INTERATION
+
+        std::stringstream str_stream;
+        str_stream << "step" << interation_times << ".csv";
+        std::ofstream fileout(str_stream.str());
+
+        for (int i = 0; i < (int)points.size(); i++)
+            fileout << points[i].GetX() << "," << points[i].GetY() << "," << points[i].GetClusterID() << std::endl;
+
+        fileout.close();
+
+        #endif //OUTPUT_EVERY_INTERATION
     }
 
     return points;
