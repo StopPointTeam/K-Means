@@ -1,5 +1,6 @@
 #include <ctime>
 #include <cmath>
+#include <omp.h>
 
 //下列代码用于输出每轮迭代的结果
 #ifdef OUTPUT_EVERY_INTERATION
@@ -70,6 +71,9 @@ void KMeans::AssignPoints(void)
     int min_cluster_id;
     double min_distance;
 
+    //在 for 循环中启用并行计算。设置 min_distance min_cluster_id 为线程 private 变量，其他变量被所有线程共享
+    #pragma omp parallel private(min_distance, min_cluster_id)
+    #pragma omp for
     for (int i = 0; i < point_num; i++) //遍历点
     {
         min_cluster_id = 0; //假定 0 号聚类为与 points[i] 最近的聚类
@@ -102,6 +106,9 @@ bool KMeans::UpdateClusters(void)
     double next_x;
     double next_y;
     
+    //在 for 循环中启用并行计算。设置 next_x next_y 为线程 private 变量，其他变量被所有线程共享
+    #pragma omp parallel private(next_x, next_y)
+    #pragma omp for    
     for (int i = 0; i < cluster_num; i++)
     {
         next_x = next_clusters_x_sum[i] / (double)next_clusters_point_num[i]; //更新后的均值点 x 坐标
@@ -126,8 +133,15 @@ bool KMeans::UpdateClusters(void)
 //返回结果
 std::vector<Point> KMeans::Result(void)
 {
-    InitPoints(); //初始化点
-    InitClusters(); //初始化聚类
+    //在初始化过程中启用并行计算。用不同线程进行点和聚类的初始化
+    #pragma omp parallel sections
+    {
+        #pragma omp section
+        InitPoints(); //初始化点
+        
+        #pragma omp section
+        InitClusters(); //初始化聚类
+    }
 
     bool is_cluster_move = true;
     int interation_times = 0;

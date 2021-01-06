@@ -23,7 +23,7 @@ jobs:
       run: sudo timedatectl set-timezone 'Asia/Shanghai'
 
     - name: Build with g++
-      run: g++ *.cpp -o km
+      run: g++ *.cpp -o km -fopenmp
 
     - name: Test K-Means
       run: ./km
