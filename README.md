@@ -1,8 +1,6 @@
 # K-Means
 
-通过 C++ 实现的并行 K-Means 算法
-
-已完成：Point 类、Cluster 类
+通过 C++ 实现的串行 K-Means 算法
 
 ## Build
 
