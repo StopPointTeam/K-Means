@@ -1,6 +1,6 @@
 # K-Means
 
-通过 C++ 实现的串行 K-Means 算法
+通过 C++ 实现的并行 K-Means 算法
 
 ## Build
 
