@@ -1,0 +1,34 @@
+name: Test K-Means in Github Action
+# By Myth, created for Stop Point Team
+
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '00 10 * * *'
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    
+    - uses: actions/checkout@v2
+
+    - name: Set time zone
+      run: sudo timedatectl set-timezone 'Asia/Shanghai'
+
+    - name: Build with g++
+      run: g++ *.cpp -o km
+
+    - name: Test K-Means
+      run: ./km
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: DATA
+        path: ./*.csv
