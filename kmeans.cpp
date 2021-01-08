@@ -23,6 +23,16 @@ KMeans::KMeans(int point_num, double max_point_crood, int cluster_num, int max_i
     this->max_interation_times = max_interation_times;
 
     srand((unsigned int)time(NULL)); //设置随机种子
+
+    //在初始化过程中启用并行计算。用不同线程进行点和聚类的初始化
+    #pragma omp parallel sections
+    {
+        #pragma omp section
+        InitPoints(); //初始化点
+        
+        #pragma omp section
+        InitClusters(); //初始化聚类
+    }
 }
 
 
@@ -133,16 +143,6 @@ bool KMeans::UpdateClusters(void)
 //返回结果
 std::vector<Point> KMeans::Result(void)
 {
-    //在初始化过程中启用并行计算。用不同线程进行点和聚类的初始化
-    #pragma omp parallel sections
-    {
-        #pragma omp section
-        InitPoints(); //初始化点
-        
-        #pragma omp section
-        InitClusters(); //初始化聚类
-    }
-
     bool is_cluster_move = true;
     int interation_times = 0;
 
