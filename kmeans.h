@@ -1,4 +1,4 @@
-#ifndef KMEANS_H
+﻿#ifndef KMEANS_H
 #define KMEANS_H
 
 //取消此处注释，则输出每轮迭代的结果
@@ -7,8 +7,7 @@
 
 #include <vector>
 
-#include "point.h"
-#include "cluster.h"
+#include "unipoint.h"
 
 
 //KMeans类。一次 K-Means 计算对应一个对象
