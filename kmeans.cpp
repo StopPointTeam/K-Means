@@ -2,16 +2,18 @@
 #include <cmath>
 #include <omp.h>
 
+#include "kmeans.h"
+
+
 //下列代码用于输出每轮迭代的结果
 #ifdef OUTPUT_EVERY_INTERATION
 
+#include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 
 #endif //OUTPUT_EVERY_INTERATION
-
-#include "kmeans.h"
 
 
 //含参构造。参数分别为：点数、坐标最大值、聚类数、最大迭代次数
@@ -140,7 +142,7 @@ bool KMeans::UpdateClusters(void)
 }
 
 
-//返回结果
+//计算并返回结果
 std::vector<Point> KMeans::Result(void)
 {
     bool is_cluster_move = true;
@@ -155,6 +157,8 @@ std::vector<Point> KMeans::Result(void)
 
         //下列代码用于输出每轮迭代的结果
         #ifdef OUTPUT_EVERY_INTERATION
+
+        std::cout << "第" << interation_times << "次迭代完成，写入 step 文件" << std::endl;
 
         std::stringstream str_stream;
         str_stream << "step" << interation_times << ".csv";

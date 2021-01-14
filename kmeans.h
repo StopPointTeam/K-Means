@@ -16,7 +16,7 @@ class KMeans
 public:
     //含参构造。参数分别为：点数、坐标最大值、聚类数、最大迭代次数
     KMeans(int point_num, double max_point_crood, int cluster_num, int max_interation_times);
-    std::vector<Point> Result(void); //返回结果
+    std::vector<Point> Result(void); //计算并返回结果
 
 private:
     int point_num; //点数

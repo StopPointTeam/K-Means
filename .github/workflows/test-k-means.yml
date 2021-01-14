@@ -26,7 +26,7 @@ jobs:
       run: g++ *.cpp -o km -fopenmp
 
     - name: Test K-Means
-      run: ./km
+      run: ./km -default
 
     - uses: actions/upload-artifact@v2
       with:

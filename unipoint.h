@@ -31,7 +31,7 @@ private:
 };
 
 
-// Cluster 作为 UniPoint 的别名。即聚类实际上是用聚类均值点表示的
+//Cluster 作为 UniPoint 的别名。即聚类实际上是用聚类均值点表示的
 typedef UniPoint Cluster;
 
 
