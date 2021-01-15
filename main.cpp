@@ -3,6 +3,7 @@
 #include <chrono>
 #include <fstream>
 #include <cstring>
+#include <thread>
 
 #include "kmeans.h"
 #include "unipoint.h"
@@ -66,6 +67,8 @@ int main(int argc, char* argv[])
 
 	fileout.close();
 	cout << "写入完成" << endl;
+
+	this_thread::sleep_for(chrono::milliseconds(5000)); //延时后结束程序
 
 	return 0;
 }

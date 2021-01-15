@@ -10,7 +10,7 @@
 #include "unipoint.h"
 
 
-//KMeans类。一次 K-Means 计算对应一个对象
+//KMeans 类。一次 K-Means 计算对应一个对象
 class KMeans
 {
 public:
