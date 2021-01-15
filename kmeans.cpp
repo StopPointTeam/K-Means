@@ -6,23 +6,23 @@
 
 
 //下列代码用于输出每轮迭代的结果
-#ifdef OUTPUT_EVERY_INTERATION
+#ifdef OUTPUT_EVERY_ITERATION
 
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 
-#endif //OUTPUT_EVERY_INTERATION
+#endif //OUTPUT_EVERY_ITERATION
 
 
 //含参构造。参数分别为：点数、坐标最大值、聚类数、最大迭代次数
-KMeans::KMeans(int point_num, double max_point_crood, int cluster_num, int max_interation_times)
+KMeans::KMeans(int point_num, double max_point_crood, int cluster_num, int max_iteration_times)
 {
     this->point_num = point_num;
     this->max_point_crood = max_point_crood;
     this->cluster_num = cluster_num;
-    this->max_interation_times = max_interation_times;
+    this->max_iteration_times = max_iteration_times;
 
     srand((unsigned int)time(NULL)); //设置随机种子
 
@@ -146,22 +146,22 @@ bool KMeans::UpdateClusters(void)
 std::vector<Point> KMeans::Result(void)
 {
     bool is_cluster_move = true;
-    int interation_times = 0;
+    int iteration_times = 0;
 
-    while (is_cluster_move && interation_times < max_interation_times) //当所有聚类不再移动或超出最大迭代次数时结束循环
+    while (is_cluster_move && iteration_times < max_iteration_times) //当所有聚类不再移动或超出最大迭代次数时结束循环
     {
         AssignPoints(); //分配点
         is_cluster_move = UpdateClusters(); //更新聚类
 
-        interation_times++;
+        iteration_times++;
 
         //下列代码用于输出每轮迭代的结果
-        #ifdef OUTPUT_EVERY_INTERATION
+        #ifdef OUTPUT_EVERY_ITERATION
 
-        std::cout << "第" << interation_times << "次迭代完成，写入 step 文件" << std::endl;
+        std::cout << "第" << iteration_times << "次迭代完成，写入 step 文件" << std::endl;
 
         std::stringstream str_stream;
-        str_stream << "step" << interation_times << ".csv";
+        str_stream << "step" << iteration_times << ".csv";
         std::ofstream fileout(str_stream.str());
 
         for (int i = 0; i < (int)points.size(); i++)
@@ -169,7 +169,7 @@ std::vector<Point> KMeans::Result(void)
 
         fileout.close();
 
-        #endif //OUTPUT_EVERY_INTERATION
+        #endif //OUTPUT_EVERY_ITERATION
     }
 
     return points;

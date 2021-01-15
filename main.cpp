@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	int point_num = 500000; //点数
 	double max_point_crood = 1000.0; //坐标最大值
 	int cluster_num = 20; //聚类数
-	int max_interation_times = 20; //最大迭代次数
+	int max_iteration_times = 20; //最大迭代次数
 
 	if (argc == 1 || strcmp(argv[1], "-default")) //加 -default 参数运行时自动使用默认计算参数
 	{	
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 			cout << "聚类数：";
 			cin >> cluster_num;
 			cout << "最大迭代次数：";
-			cin >> max_interation_times;
+			cin >> max_iteration_times;
 		}
 	}
 
@@ -46,9 +46,9 @@ int main(int argc, char* argv[])
 	cout << "点数：" << point_num << endl;
 	cout << "坐标最大值：" << max_point_crood << endl;
 	cout << "聚类数：" << cluster_num << endl;
-	cout << "最大迭代次数：" << max_interation_times << endl;
+	cout << "最大迭代次数：" << max_iteration_times << endl;
 
-	KMeans km(point_num, max_point_crood, cluster_num, max_interation_times);
+	KMeans km(point_num, max_point_crood, cluster_num, max_iteration_times);
 
 	cout << endl << "开始计时..." << endl;
 	chrono::time_point<chrono::system_clock> time_start = chrono::system_clock::now(); //获取计算开始时的时间

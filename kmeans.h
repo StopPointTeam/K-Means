@@ -2,7 +2,7 @@
 #define KMEANS_H
 
 //取消此处注释，则输出每轮迭代的结果
-//#define OUTPUT_EVERY_INTERATION
+//#define OUTPUT_EVERY_ITERATION
 
 
 #include <vector>
@@ -15,7 +15,7 @@ class KMeans
 {
 public:
     //含参构造。参数分别为：点数、坐标最大值、聚类数、最大迭代次数
-    KMeans(int point_num, double max_point_crood, int cluster_num, int max_interation_times);
+    KMeans(int point_num, double max_point_crood, int cluster_num, int max_iteration_times);
     std::vector<Point> Result(void); //计算并返回结果
 
 private:
@@ -29,7 +29,7 @@ private:
     std::vector<double> next_clusters_x_sum; //存放此轮迭代结束后对应聚类中点的 x 坐标和。用于计算下一轮中对应聚类的均值点
     std::vector<double> next_clusters_y_sum; //存放此轮迭代结束后对应聚类中点的 y 坐标和。用于计算下一轮中对应聚类的均值点
 
-    int max_interation_times; //最大迭代次数
+    int max_iteration_times; //最大迭代次数
 
     void InitPoints(void); //初始化点
     void InitClusters(void); //初始化聚类（均值点）
