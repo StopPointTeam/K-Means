@@ -23,7 +23,7 @@ class Point : public UniPoint
 {
 public:
     Point(double x, double y);
-    double GetClusterID(void);
+    int GetClusterID(void);
     void SetClusterID(int cluster_id);
 
 private:

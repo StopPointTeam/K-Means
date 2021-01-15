@@ -38,7 +38,7 @@ Point::Point(double x, double y) : UniPoint(x, y)
 }
 
 
-double Point::GetClusterID(void)
+int Point::GetClusterID(void)
 {
     return cluster_id;
 }
